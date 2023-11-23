@@ -16,7 +16,7 @@ const ContactForm = ({ contacts, onSubmit }) => {
     event.preventDefault();
     const { name, number } = formData;
 
-    if (contacts.find(contact => contact.name.toLowerCase() === name.toLowerCase())) {
+    if (Array.isArray(contacts) && contacts.find(contact => contact.name.toLowerCase() === name.toLowerCase())) {
       alert(`Контакт з таким ім'ям вже існує`);
       return;
     }
