@@ -25,6 +25,11 @@ const App = () => {
   }, [contacts]);
 
   const handleAddContact = (contact) => {
+    if (contacts.find((c) => c.name.toLowerCase() === contact.name.toLowerCase())) {
+      alert(`Контакт з таким ім'ям вже існує`);
+      return;
+    }
+
     setContacts((prevContacts) => [...prevContacts, contact]);
   };
 
@@ -47,7 +52,7 @@ const App = () => {
   return (
     <div>
       <h1>Phonebook</h1>
-      <ContactForm onSubmit={handleAddContact} />
+      <ContactForm contacts={contacts} onSubmit={handleAddContact} />
       <h2>Contacts</h2>
       <Filter value={filter} onChange={handleFilterChange} />
       <ContactList contacts={getFilteredContacts()} onDelete={handleDeleteContact} />
